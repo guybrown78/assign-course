@@ -131,7 +131,6 @@ export class AssignToCourseComponent implements OnInit {
     if (this.existingUsersEmails.length < 1 && this.newUsers.length < 1) return false;
     if (this.newUsers.length < 1) return true;
     for (let user of this.newUsers) {
-      console.log(user)
       if (user.EmailAddress.length < 1 || user.FirstName.length < 1 || user.LastName.length < 1) return false;
     }
     return true;
@@ -190,10 +189,7 @@ export class AssignToCourseComponent implements OnInit {
     if (this.existingUsers.length > 0) {
       this.usersService.batchAssignUserToCourseByEmail(emails, this.courseId).subscribe({
         next: response => {
-					console.log("response >>>>>>>>>> ")
-					console.log(response)
 					this.successResults = response.body.results
-					console.log(this.successResults)
 				}
       });
     }
@@ -212,7 +208,6 @@ export class AssignToCourseComponent implements OnInit {
 				statusColour = 'blue';
 				break;
 		}
-		console.log(str, statusColour);
 		return statusColour;
 	}
   returnToDashboard() {

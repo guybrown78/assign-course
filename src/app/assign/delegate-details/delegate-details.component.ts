@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DelegateType } from "../../models/DelegateType";
 
 @Component({
@@ -6,7 +6,7 @@ import { DelegateType } from "../../models/DelegateType";
   templateUrl: './delegate-details.component.html',
   styleUrls: ['./delegate-details.component.css']
 })
-export class DelegateDetailsComponent implements OnInit {
+export class DelegateDetailsComponent {
 	@Input ('fullName') fullName:string;
 	@Input ('emailAddress') emailAddress:string;
 	@Input ('delegateType') delegateType:DelegateType;
@@ -15,9 +15,6 @@ export class DelegateDetailsComponent implements OnInit {
 	public DelegateTypeEnum = DelegateType;
   constructor() { }
 
-  ngOnInit() {
-		console.log(">>>>>>>>>>>>>>>> ", this.delegateType)
-  }
 	onRemoveUser(){
 		this.removeUser.emit(this.emailAddress);
 	}

@@ -115,7 +115,6 @@ export class AssignCourseComponent implements OnInit {
     if (this.existingUsers.length < 1 && this.newUsers.length < 1) return false;
     if (this.newUsers.length < 1) return true;
     for (let user of this.newUsers) {
-      console.log(user)
       if (user.EmailAddress.length < 1 || user.FirstName.length < 1 || user.LastName.length < 1) return false;
     }
     return true;
