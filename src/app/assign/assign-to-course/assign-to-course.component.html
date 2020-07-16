@@ -104,7 +104,12 @@
 	<div class="tansparent-node">
 		<tf-node-fxl-flex-fxr>
 			<tf-node-slot-wrapper slot="fxl">
-				<tf-button colour="white">Cancel</tf-button>
+				<tf-button 
+					colour="white"
+					(click)="returnToDashboard()"
+				>
+					Cancel
+				</tf-button>
 			</tf-node-slot-wrapper>
 			<tf-node-slot-wrapper slot="flex">
 				&nbsp;
@@ -137,13 +142,24 @@
 
 			<tf-table-row *ngFor="let result of successResults">
 					<tf-table-cell c-width="33%">
+						<tf-node-row-cell-span>
 							{{ result.name | titlecase }}
+						</tf-node-row-cell-span>
+							
 					</tf-table-cell>
 					<tf-table-cell c-width="33%">
+						<tf-node-row-cell-span>
 							{{ result.email }}
+						</tf-node-row-cell-span>
 					</tf-table-cell>
 					<tf-table-cell c-width="33%">
-							{{ result.result }}
+							<tf-node-text>
+								<tf-status 
+									[attr.traffic-light-colour]="getStatusColour(result.result)"
+								>	
+									{{ result.result }}
+								</tf-status>
+							</tf-node-text>
 					</tf-table-cell>
 			</tf-table-row>
 	</tf-table>

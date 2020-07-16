@@ -30,7 +30,39 @@ export class UsersService {
 
 	// FAKE STATIC CALL
 	batchAssignUserToCourseByEmail(emailList, courseId) {
+		//User is already assigned to that course
+		//Success
+		//Failed to Register
+		//Created and Assigned
+		const results = emailList.map(item => {
+			return {
+				email:item.emailAddress,
+				name:item.fullName,
+				result:"Success"
+			}
+		})
+		results.push({
+			email:"fake-user-one@fake.com",
+			name:"Fake One",
+			result:"User is already assigned to that course"
+		})
+		results.push({
+			email:"fake-user-two@fake.com",
+			name:"Fake Two",
+			result:"Success"
+		})
+		results.push({
+			email:"fake-user-three@fake.com",
+			name:"Fake Three",
+			result:"Failed to Register"
+		})
+		results.push({
+			email:"fake-user-four@fake.com",
+			name:"Fake Four",
+			result:"Created and Assigned"
+		})
 		const body = {
+			results,
 			Emails: emailList,
 			CourseId: courseId,
 		}

@@ -189,11 +189,32 @@ export class AssignToCourseComponent implements OnInit {
 
     if (this.existingUsers.length > 0) {
       this.usersService.batchAssignUserToCourseByEmail(emails, this.courseId).subscribe({
-        next: response => this.successResults = response.body.results
+        next: response => {
+					console.log("response >>>>>>>>>> ")
+					console.log(response)
+					this.successResults = response.body.results
+					console.log(this.successResults)
+				}
       });
     }
   }
 
+	getStatusColour(str:string):string{
+		let statusColour = 'amber';
+		switch (str.toLowerCase()){
+			case "success":
+				statusColour = 'green';
+				break;
+			case "failed to register":
+				statusColour = 'red';
+				break;
+			case "created and assigned":
+				statusColour = 'blue';
+				break;
+		}
+		console.log(str, statusColour);
+		return statusColour;
+	}
   returnToDashboard() {
     // 
   }
