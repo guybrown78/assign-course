@@ -26,11 +26,17 @@
 			<div class="content-container">
 				
 				<div class="step-node">
-					<div class="step-title grey">
+					<div 
+						class="step-title"
+						[ngClass]="(currentStep===1)?'blue':'grey'"
+					>
 						Course Name
 					</div>
 						<div class="step-content-container">
-							<div class="step-content course grey">
+							<div 
+								class="step-content course"
+								[ngClass]="(currentStep===1)?'blue':'grey'"
+							>
 								<tf-select
 									name="course"
 									(tfOnSelect)="onSelectCourse($event)"
@@ -45,18 +51,25 @@
 				</div>
 
 				<div class="step-node">
-					<div class="step-title blue">
+					<div 
+						class="step-title"
+						[ngClass]="(currentStep===2)?'blue':'grey'"
+					>
 						Delegates
 					</div>
 					<div class="step-content-container">
 						
-						<div class="step-content user blue">
+						<div 
+							class="step-content user"
+							[ngClass]="(currentStep===2)?'blue':'grey'"
+						>
 							<tf-search
 								#searchEl
 								[placeholder]="'Enter name or email address'"
 								(tfOnInput)="onSearchInput($event)"
 								(tfOnSearch)="onSearchSelected($event)"
 								(paste)="addUser($event)"
+								[disabled]="currentStep === 1"
 							>
 								<tf-dropdown-option 
 									*ngFor="let result of results" 
@@ -115,10 +128,16 @@
 				&nbsp;
 			</tf-node-slot-wrapper>
 			<tf-node-slot-wrapper slot="fxr">
+			
+				<tf-span-italic *ngIf="currentStep === 1" colour="blue">
+					Select a course to continue
+				</tf-span-italic>
+	
 				<tf-button 
 					colour="aqua"
 					(click)="createUsersAndAssign()"
 					[disabled]="buttonDisabled"
+					*ngIf="currentStep !== 1"
 				>
 					Assign {{ existingUsers.length + newUsersEmails.length }} Delegates to this Course
 				</tf-button>

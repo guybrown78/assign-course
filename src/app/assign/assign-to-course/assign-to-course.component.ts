@@ -27,6 +27,10 @@ export class AssignToCourseComponent implements OnInit {
 	showConfirmation = false;
 	reissueIfAlreadyAssigned = false;
 	DelegateTypeEnum = DelegateType;
+	// Added currentStep. 
+	// 1 = select course
+	// 2 = course selected, select/add delecgates
+	currentStep:number = 1;
   constructor(
 		private usersService: UsersService,
 		private coursesService: CoursesService
@@ -44,11 +48,14 @@ export class AssignToCourseComponent implements OnInit {
 
 	onSelectCourse(e) {
     if (e.detail.value === '') {
-      this.courseId = null;
+			this.courseId = null;
+			this.currentStep = 1;
       return;
     }
     this.courseId = e.detail.value;
-    this.buttonDisabled = !this.validateForm();
+		this.buttonDisabled = !this.validateForm();
+		// increment step
+		this.currentStep = 2;
 	}
 	
 

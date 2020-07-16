@@ -23,7 +23,7 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
-    "tf-core-components": "0.0.136",
+    "tf-core-components": "0.0.138",
     "tf-ng-form-components": "0.0.5",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
