@@ -1,0 +1,64 @@
+.tansparent-node{
+	margin-bottom:1rem;;
+}
+.content-container{
+	padding:1rem;
+	margin-left: 0.5rem;
+}
+.assign-card-header{
+	margin-left: 0.5rem;
+}
+.step-node{
+	display: flex;
+	margin-bottom: 2px;
+}
+.step-title{
+	display: inline-flex;
+	align-items: center;
+	width:130px;
+	height: 55px;
+	font-size: 0.9rem;
+	border-radius: 3px;
+	padding: 0.5rem;
+	margin-right: 2px;
+}
+.step-title.grey{
+	background-color: #D0DFE3;
+	color: #363154;
+}
+.step-title.blue{
+	background-color: #224595;
+	color: #FFFFFF;
+}
+.step-content-container{
+	flex:1 0 0%;
+	display: flex;
+	flex-direction: column;
+}
+.step-content{
+	display: flex;
+	position: relative;
+	border-radius: 3px;
+	height: 55px;
+	padding: 0 1%;
+}
+.step-content.course{
+	overflow: hidden;
+}
+.step-content.blue{
+	background-color: #224595;
+}
+.step-content.grey{
+	background-color: #D0DFE3;
+}
+.step-content.course tf-select{
+	position: absolute;
+	top: 5px;
+	width: 98%;
+}
+.step-content.user tf-search{
+	position: absolute;
+	top: 2px;
+	width: 98%;
+	z-index: 25;
+}

@@ -1,0 +1,164 @@
+<tf-card *ngIf="!showConfirmation && courses != undefined">
+	<!-- Card title and Icon button -->
+	<div class="tansparent-node">
+		<tf-node-flex-fxr>
+			<tf-node-slot-wrapper slot="flex">
+				<tf-h3>Assign a course</tf-h3>
+			</tf-node-slot-wrapper>
+			<tf-node-slot-wrapper slot="fxr">
+				<tf-icon-button
+					size="m"
+					icon="cloud-upload"
+					colour="blue"
+				></tf-icon-button>
+			</tf-node-slot-wrapper>
+		</tf-node-flex-fxr>
+	</div>
+	
+	<tf-card padding="none" colour="white">
+
+			<tf-form-title type="page">
+				<tf-h4 class="assign-card-header">
+					Choose a course and then assign...
+				</tf-h4>
+			</tf-form-title>
+
+			<div class="content-container">
+				
+				<div class="step-node">
+					<div class="step-title grey">
+						Course Name
+					</div>
+						<div class="step-content-container">
+							<div class="step-content course grey">
+								<tf-select
+									name="course"
+									(tfOnSelect)="onSelectCourse($event)"
+								>
+									<tf-select-option attr.value='{{ null }}'>Select a course</tf-select-option>
+									<tf-select-option *ngFor="let course of courses" attr.value='{{course.id}}'>{{course.name}}</tf-select-option>
+								</tf-select>
+							</div>
+							
+				
+					</div>
+				</div>
+
+				<div class="step-node">
+					<div class="step-title blue">
+						Delegates
+					</div>
+					<div class="step-content-container">
+						
+						<div class="step-content user blue">
+							<tf-search
+								#searchEl
+								[placeholder]="'Enter name or email address'"
+								(tfOnInput)="onSearchInput($event)"
+								(tfOnSearch)="onSearchSelected($event)"
+								(paste)="addUser($event)"
+							>
+								<tf-dropdown-option 
+									*ngFor="let result of results" 
+									attr.value="{{ result.emailAddress }}"
+								>
+									{{ result.fullName | titlecase }} - {{ result.emailAddress }}
+								</tf-dropdown-option>
+							</tf-search>
+						</div>
+
+						<delegate-details 
+							*ngFor="let user of existingUsers"
+							[fullName]=user.fullName
+							[emailAddress]=user.emailAddress
+							[delegateType]=DelegateTypeEnum.EXISTING
+							(removeUser)='removeUser($event)'
+						></delegate-details>
+
+						<delegate-details 
+							*ngFor="let user of newUsersEmails"
+							[emailAddress]=user
+							[delegateType]=DelegateTypeEnum.NEW
+							(removeUser)='removeUser($event)'
+							(updateName)='handleNameInput($event)'
+						></delegate-details>
+
+					</div> <!-- END step-content-container -->
+				</div>
+				
+
+			</div> <!-- END content-container -->
+			
+	</tf-card>
+
+	<tf-card colour="white">
+		<tf-checkbox
+			[label]="'Reissue if already assigned'"
+			hint="This will send a reminder email to the user for this course"
+			[name]="reissueIfAlreadyAssigned"
+			(tfOnChecked)="setReissueIfAlreadyAssigned($event)"
+			>
+			</tf-checkbox>
+	</tf-card>
+
+	<div class="tansparent-node">
+		<tf-node-fxl-flex-fxr>
+			<tf-node-slot-wrapper slot="fxl">
+				<tf-button colour="white">Cancel</tf-button>
+			</tf-node-slot-wrapper>
+			<tf-node-slot-wrapper slot="flex">
+				&nbsp;
+			</tf-node-slot-wrapper>
+			<tf-node-slot-wrapper slot="fxr">
+				<tf-button 
+					colour="aqua"
+					(click)="createUsersAndAssign()"
+					[disabled]="buttonDisabled"
+				>
+					Assign {{ existingUsers.length + newUsersEmails.length }} Delegates to this Course
+				</tf-button>
+			</tf-node-slot-wrapper>
+		</tf-node-fxl-flex-fxr>
+	</div>
+	
+
+</tf-card>
+
+
+
+
+<tf-card *ngIf="showConfirmation">
+	<tf-table *ngIf="successResults !== null">
+			<tf-table-head slot="table-head">
+					<tf-table-head-cell c-width="33%">Name</tf-table-head-cell>
+					<tf-table-head-cell c-width="33%">Email</tf-table-head-cell>
+					<tf-table-head-cell c-width="33%">Result</tf-table-head-cell>
+			</tf-table-head>
+
+			<tf-table-row *ngFor="let result of successResults">
+					<tf-table-cell c-width="33%">
+							{{ result.name | titlecase }}
+					</tf-table-cell>
+					<tf-table-cell c-width="33%">
+							{{ result.email }}
+					</tf-table-cell>
+					<tf-table-cell c-width="33%">
+							{{ result.result }}
+					</tf-table-cell>
+			</tf-table-row>
+	</tf-table>
+	
+	<div style="padding-top: 8px">
+			<tf-node-flex-fxr>
+					<tf-button 
+							slot="fxr"
+							colour="aqua" 
+							button-type="button"
+							(click)="returnToDashboard()"
+							[disabled]="buttonDisabled"
+					>
+							Return to dashboard
+					</tf-button>
+			</tf-node-flex-fxr>
+	</div>
+</tf-card>

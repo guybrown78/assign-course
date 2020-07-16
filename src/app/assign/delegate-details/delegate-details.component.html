@@ -1,0 +1,42 @@
+<div class="delegate-details-container">
+
+	<div class="name-details">
+
+		<div 
+			class="input-wrapper" 
+			*ngIf="delegateType === DelegateTypeEnum.NEW"
+		>
+			<tf-input 
+				name="{{emailAddress}}:first" 
+				(tfOnInput)="onUserNameUpdated($event)" 
+				class="first-name-input"
+				placeholder="First Name">
+			</tf-input>
+			<tf-input 
+				name="{{emailAddress}}:last" 
+				(tfOnInput)="onUserNameUpdated($event)" 
+				class="last-name-input"
+				placeholder="Last Name">
+			</tf-input>
+		</div>
+
+		<div 
+			class="name-wrapper" 
+			*ngIf="delegateType === DelegateTypeEnum.EXISTING"
+		> 
+			{{ fullName }}  
+		</div>
+
+	</div>
+
+	<div class="email-details">
+		{{ emailAddress }}
+		<tf-icon-button
+			size="xs"
+			icon="close"
+			colour="grey"
+			(click)="onRemoveUser()"
+		></tf-icon-button>
+	</div>
+	
+</div>

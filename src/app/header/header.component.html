@@ -1,0 +1,56 @@
+	<!-- client-logo-source="https://dwglogo.com/wp-content/uploads/2016/01/Petrofac-Logo.png" -->
+
+
+	<tf-app-base-header 
+	*ngIf="!headerData"	
+	app-title="Learning Management" 
+	app-initials="lm"
+	is-logo-clickable="true"
+	show-app-logo="true"
+>
+</tf-app-base-header>
+
+
+<tf-app-base-header 
+	*ngIf="headerData"	
+	app-title="Learning Management" 
+	app-initials="lm"
+	is-logo-clickable="true"
+	show-app-logo="true"
+>
+	<tf-quick-links
+		slot="quicklinks" 
+		dropdown-id="quicklinks-dd"
+		(tfDropdownSelected)="onQuicklinkOptionSelected($event)"
+	>
+		<tf-dropdown-option value="1" >Assign Course</tf-dropdown-option>
+		<tf-dropdown-option value="2" >Assign Category</tf-dropdown-option>
+	</tf-quick-links>
+
+	<tf-app-client-logo 
+		slot="clientlogo" 
+		client-logo-source="https://logodix.com/logo/80482.png"
+		[showUserAccount]="showUserAccountMenu"
+		(tfUserAccountDropdownSelected)="onUserAccountItemSelected($event)"
+	>
+		<tf-dropdown-option value="signOut">
+			Sign Out
+		</tf-dropdown-option> 
+
+	</tf-app-client-logo>
+
+
+</tf-app-base-header>
+
+
+<tf-modal 
+	id="signOutConfirmation" 
+	display-title="Log Out"
+	[opened]="signOutConfirmationOpened" 
+	show-close="false"
+	confirm-text="Yes, Log Me Out"
+	(tfModalClosed)="tfModalClosedHandler($event)"
+	(tfModalConfirmed)="tfModalConfirmedHandler($event)"
+>
+	<tf-p-tag>Please confirm that you would like to end your session and log out</tf-p-tag>
+</tf-modal>

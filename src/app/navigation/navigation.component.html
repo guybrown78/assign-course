@@ -1,0 +1,38 @@
+<tf-side-drawer display-title="Main Menu">
+
+	<tf-side-drawer-nav
+		(tfRouterLinkClicked)="onRouterNavClicked($event)"
+	>
+
+		<tf-side-drawer-nav-link 
+			*ngFor="let item of navigationData"
+			attr.href-title="{{ item.title }}"
+			attr.href-link="{{ item.hrefLink }}"
+			attr.router-link="{{ item.routerLink }}"
+			icon="chevron-down"
+		>
+			{{ item.label }}
+
+			<tf-side-drawer-sub-nav 
+				slot="sub" 
+				*ngIf=" item.hasSub"
+			>
+
+				<tf-side-drawer-sub-nav-link
+					*ngFor="let subItem of item.subItems"
+					attr.href-title="{{ subItem.title }}"
+					attr.href-link="{{ subItem.hrefLink }}"
+					attr.router-link="{{ subItem.routerLink }}"
+				>
+
+					{{ subItem.label }}
+					
+				</tf-side-drawer-sub-nav-link>
+
+			</tf-side-drawer-sub-nav>
+
+		</tf-side-drawer-nav-link>
+
+	</tf-side-drawer-nav>
+
+</tf-side-drawer>

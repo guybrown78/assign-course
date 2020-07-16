@@ -1,0 +1,92 @@
+<tf-form-page-card *ngIf="!showConfirmation && courses != undefined">
+
+	<tf-form-title type="page" slot="title">
+			<tf-h3>
+					Assign Course
+			</tf-h3>
+	</tf-form-title>
+
+	<form>
+
+			<tf-select
+					name="course"
+					label="Course"
+					(tfOnSelect)="onSelectCourse($event)"
+			>
+					<tf-select-option attr.value='{{ null }}'>Please select a course</tf-select-option>
+					<tf-select-option *ngFor="let course of courses" attr.value='{{course.id}}'>{{course.name}}</tf-select-option>
+			</tf-select>
+
+			<tf-p *ngFor="let user of existingUsers"><mat-icon class="deleteIcon" (click)="removeUser(user)">delete</mat-icon>   {{user}}</tf-p>
+
+			<div *ngFor="let user of newUsersEmails" style="display: flex; justify-content: space-between;">
+					<tf-p><mat-icon class="deleteIcon" (click)="removeUser(user)">delete</mat-icon>   {{user}}</tf-p>
+					<div style="display: flex;">
+							<tf-input name="{{user}}:first" (tfOnInput)="handleNameInput($event)" placeholder="First Name"></tf-input>
+							<tf-input name="{{user}}:last" (tfOnInput)="handleNameInput($event)" style="padding-left: 5px" placeholder="Last Name"></tf-input>
+					</div>
+			</div>
+
+			<div class="search-container">
+					<tf-search class="search-field"
+							#searchEl
+							[placeholder]="'Enter name or email address'"
+							(tfOnInput)="onSearchInput($event)"
+							(tfOnSearch)="onSearchSelected($event)"
+							(paste)="addUser($event)"
+					>
+							<tf-dropdown-option *ngFor="let result of results" attr.value="{{ result.emailAddress }}">{{ result.fullName | titlecase }} - {{ result.emailAddress }}</tf-dropdown-option>
+					</tf-search>
+
+					<tf-node-flex-fxr>
+							<tf-button 
+									slot="fxr"
+									colour="aqua" 
+									button-type="button"
+									(click)="createUsersAndAssign()"
+									[disabled]="buttonDisabled"
+							>
+									Assign
+							</tf-button>
+					</tf-node-flex-fxr>
+			</div>
+
+	</form>
+
+</tf-form-page-card>
+
+<tf-card *ngIf="showConfirmation">
+	<tf-table *ngIf="successResults !== null">
+			<tf-table-head slot="table-head">
+					<tf-table-head-cell c-width="33%">Name</tf-table-head-cell>
+					<tf-table-head-cell c-width="33%">Email</tf-table-head-cell>
+					<tf-table-head-cell c-width="33%">Result</tf-table-head-cell>
+			</tf-table-head>
+
+			<tf-table-row *ngFor="let result of successResults">
+					<tf-table-cell c-width="33%">
+							{{ result.name | titlecase }}
+					</tf-table-cell>
+					<tf-table-cell c-width="33%">
+							{{ result.email }}
+					</tf-table-cell>
+					<tf-table-cell c-width="33%">
+							{{ result.result }}
+					</tf-table-cell>
+			</tf-table-row>
+	</tf-table>
+	
+	<div style="padding-top: 8px">
+			<tf-node-flex-fxr>
+					<tf-button 
+							slot="fxr"
+							colour="aqua" 
+							button-type="button"
+							(click)="returnToDashboard()"
+							[disabled]="buttonDisabled"
+					>
+							Return to dashboard
+					</tf-button>
+			</tf-node-flex-fxr>
+	</div>
+</tf-card>
