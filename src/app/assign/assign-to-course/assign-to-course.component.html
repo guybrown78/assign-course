@@ -129,10 +129,16 @@
 			</tf-node-slot-wrapper>
 			<tf-node-slot-wrapper slot="fxr">
 			
-				<tf-span-italic *ngIf="currentStep === 1" colour="blue">
+				<!-- <tf-span-italic *ngIf="currentStep === 1" colour="blue">
 					Select a course to continue
-				</tf-span-italic>
-	
+				</tf-span-italic> -->
+				<tf-button 
+					colour="aqua"
+					disabled
+					*ngIf="currentStep === 1"
+				>
+					Select a course to continue
+				</tf-button>
 				<tf-button 
 					colour="aqua"
 					(click)="createUsersAndAssign()"
