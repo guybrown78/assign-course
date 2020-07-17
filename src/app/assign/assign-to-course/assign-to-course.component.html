@@ -1,25 +1,10 @@
 <tf-card *ngIf="!showConfirmation && courses != undefined">
-	<!-- Card title and Icon button -->
-	<div class="tansparent-node">
-		<tf-node-flex-fxr>
-			<tf-node-slot-wrapper slot="flex">
-				<tf-h3>Assign a course</tf-h3>
-			</tf-node-slot-wrapper>
-			<tf-node-slot-wrapper slot="fxr">
-				<!-- <tf-icon-button
-					size="m"
-					icon="cloud-upload"
-					colour="blue"
-				></tf-icon-button> -->
-			</tf-node-slot-wrapper>
-		</tf-node-flex-fxr>
-	</div>
-	
+
 	<tf-card padding="none" colour="white">
 
 			<tf-form-title type="page">
 				<tf-h4 class="assign-card-header">
-					Choose a course and then assign...
+					Firstly, choose a course and then add delegates
 				</tf-h4>
 			</tf-form-title>
 
@@ -65,7 +50,7 @@
 						>
 							<tf-search
 								#searchEl
-								[placeholder]="'Enter name or email address'"
+								[placeholder]="'Enter name or add email addresses to add new people. You can add multiple emalls using a semi-colon to seperate. E,g, john@company.com; sally@company.com'"
 								(tfOnInput)="onSearchInput($event)"
 								(tfOnSearch)="onSearchSelected($event)"
 								(paste)="addUser($event)"
