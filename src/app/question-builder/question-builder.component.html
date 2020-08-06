@@ -1,0 +1,189 @@
+<tf-card>
+	<tf-node padding="none">
+
+		<div class="node-inner">
+		
+			<div class="question-title-container">
+
+		
+
+				<div class="question-number">
+					<tf-h4>
+						1
+					</tf-h4>
+				</div>
+				<div class="question-title">
+					<tf-h4>
+						Question
+					</tf-h4>
+				</div>
+				<div class="question-actions">
+					
+					<tf-dropdown 
+						display-title="Actions" 
+						colour="grey" 
+						dropdown-id="questionId"
+					>
+							<tf-dropdown-option value="1" >
+								Upload Question Image
+							</tf-dropdown-option>
+							<tf-dropdown-option value="2" >
+								Upload Correct Answer Image
+							</tf-dropdown-option>
+							<tf-dropdown-option value="3" >
+								Add an Answer
+							</tf-dropdown-option>
+							<tf-dropdown-option value="4" >
+								Delete Question
+							</tf-dropdown-option>
+					</tf-dropdown>
+
+				</div>
+			</div>
+
+
+			<div class="content-container">
+			
+				<div class="step-node">
+					<!-- title -->
+					<div 
+						class="step-title"
+						[ngClass]="(currentStep===1)?'blue':'grey'"
+					>
+						Learning Objective
+					</div>
+	
+					<!-- content -->
+					<div class="step-content-container">
+						<div 
+							class="step-content learning-objective"
+							[ngClass]="(currentStep===1)?'blue':'grey'"
+						>
+						
+							<form [formGroup]="loForm" (ngSubmit)="onLOSubmit()" >
+
+								<tf-node-flex-fxr>
+
+									<tf-ng-input
+										slot="flex"
+										[name]="learningObjective"
+										type="input"
+										placeholder="Type the questions Learning Objective then hit 'ENTER'"
+										[formControl]="learningObjective"
+										[disabled]="loDisabled"
+									></tf-ng-input>
+
+									<tf-button-light-dom 
+										slot="fxr"
+										[colour]="!loSubmitted ? 'blue' : !loDisabled ? 'blue' : 'grey' " 
+										button-type="submit"
+										[disabled]="!loForm.valid"
+									>	
+										{{ !loSubmitted ? "Add" : loDisabled ? "Edit" : "Change" }}
+									</tf-button-light-dom>
+						
+								</tf-node-flex-fxr>
+
+							</form>
+
+						</div>
+						
+					</div>
+	
+				</div> <!-- END .step-node -->
+
+
+
+
+				<div class="step-node">
+					<!-- title -->
+					<div 
+						class="step-title"
+						[ngClass]="(currentStep===2)?'blue':'grey'"
+					>
+						Question
+					</div>
+	
+					<!-- content -->
+					<div class="step-content-container">
+						<div 
+							class="step-content learning-objective"
+							[ngClass]="(currentStep===2)?'blue':'grey'"
+						>
+						
+							<form 
+								[formGroup]="qtForm" 
+								(ngSubmit)="onQTSubmit()"
+							>
+
+								<tf-node-flex-fxr>
+
+									<tf-ng-input
+										slot="flex"
+										[name]="questionTitle"
+										type="input"
+										placeholder="Type the questions Learning Objective then hit 'ENTER'"
+										[formControl]="questionTitle"
+										[disabled]="qtDisabled"
+									></tf-ng-input>
+
+
+									<tf-button-light-dom 
+										slot="fxr"
+										[colour]="!qtSubmitted ? 'blue' : !qtDisabled ? 'blue' : 'grey' " 
+										button-type="submit"
+										[disabled]="!qtForm.valid"
+									>	
+										{{ !qtSubmitted ? "Add" : qtDisabled ? "Edit" : "Change" }}
+									</tf-button-light-dom>
+						
+								</tf-node-flex-fxr>
+
+							</form>
+
+						</div>
+						
+					</div>
+	
+				</div> <!-- END .step-node -->
+
+
+
+
+				<div class="step-node">
+					<!-- title -->
+					<div 
+						class="step-title"
+						[ngClass]="(currentStep===3)?'blue':'grey'"
+					>
+						Answers
+					</div>
+	
+					<!-- content -->
+					<div class="step-content-container">
+						<div 
+							class="step-content answers"
+						>
+						
+							<answer-details 
+								*ngFor="let answer of answers"
+								[title]=answer.title
+								[imageName]=answer.emailAddress
+								[isCorrectAnswer]=answer.isCorrectAnswer
+								[index]=answer.index
+								(removeAnswer)='removeAnswer($event)'
+								(updateTitle)='updateAnserTitle($event)'
+							></answer-details>
+						</div>
+						
+					</div>
+	
+				</div> <!-- END .step-node -->
+
+
+			</div> <!-- END .content-container -->
+
+		</div> <!-- END .node-inner -->
+
+	</tf-node>
+</tf-card>

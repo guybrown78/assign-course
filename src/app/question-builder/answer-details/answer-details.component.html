@@ -1,0 +1,31 @@
+<div class="delegate-details-container">
+
+	<tf-icon-button
+			size="xs"
+			icon="check"
+			colour="aqua"
+			(click)="onRemoveAnswer()"
+	></tf-icon-button>
+
+	<div class="name-details">
+
+			<tf-input 
+				name="answerTitle" 
+				(tfOnInput)="onAnswerTitleUpdated($event)" 
+				class="first-name-input"
+				placeholder="Enter the Answer">
+			</tf-input>
+
+	</div>
+
+	<div class="email-details">
+
+		<tf-icon-button
+			size="xs"
+			icon="close"
+			colour="grey"
+			(click)="onRemoveAnswer()"
+		></tf-icon-button>
+	</div>
+	
+</div>

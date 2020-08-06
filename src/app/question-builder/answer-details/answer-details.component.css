@@ -1,0 +1,49 @@
+.delegate-details-container{
+	display: flex;
+	background-color: #D0DFE3;
+	color: #363154;
+	width: 98%;
+	height: 55px;
+	margin-bottom: 3px;
+	border-radius: 3px;
+	padding: 0 0.5rem;
+}
+/* .name-details,
+.email-details{
+	display: flex;
+	background-color: #D0DFE3;
+	color: #363154;
+	width: 50%;
+	height: 55px;
+	align-items: center;
+	margin-top: 3px;
+	border-radius: 3px;
+	padding: 0 0.5rem;
+}
+.name-details{
+	margin-right: 1px;
+} */
+/* .email-details{
+	margin-left: 2px;
+	justify-content: space-between;
+	padding-left: 0.75rem;
+}
+.name-wrapper{
+	padding-left: 0.75rem;
+} */
+.input-wrapper{
+	display: flex;
+	position: relative;
+	width: 100%;
+}
+.input-wrapper tf-input{
+	position: absolute;
+	top: -23px;
+	width: 49%;
+}
+.input-wrapper tf-input.first-name-input{
+	left: 0;
+}
+.input-wrapper tf-input.last-name-input{
+	right: 0;
+}
