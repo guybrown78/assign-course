@@ -107,6 +107,12 @@ export class QuestionDetailsComponent implements OnInit {
 		this.setQuestionDetails();
 	}
 
+	onStepAddAnswerButtonClicked(){
+		if(this.currentStep<3){
+			return;
+		}
+		this.onAddNewAnswer();
+	}
 	onAddNewAnswer(){
 		this.answers.push(
 			{

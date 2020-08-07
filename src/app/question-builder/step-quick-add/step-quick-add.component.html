@@ -1,0 +1,28 @@
+<div 
+	class="quick-add-container"
+	[ngClass]="!disabled ? 'clickable' : '' "
+>
+	<div class="left">
+		<div class="line" [ngClass]="!disabled ? 'blue' : 'grey' "></div>
+	</div>
+	<div class="middle">
+
+		<tf-leading-icon-label>
+			<tf-icon-add 
+				class="add-icon" 
+				[ngClass]="!disabled ? 'blue' : 'grey' "
+				slot="icon"
+			></tf-icon-add>
+			<tf-p 
+				[colour]="disabled ? 'grey' : 'blue'"
+			>
+				{{ title }}
+			</tf-p>
+		</tf-leading-icon-label>
+
+
+	</div>
+	<div class="right">
+		<div class="line" [ngClass]="!disabled ? 'blue' : 'grey' "></div>
+	</div>
+</div>

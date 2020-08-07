@@ -173,12 +173,20 @@
 						[disabled]="currentStep<3"
 					></answer-details>
 
-					<tf-button 
+					<!-- <tf-button 
 						[disabled]="currentStep<3"
 						(click)="onAddNewAnswer()"
 					>
 						add new answer
-					</tf-button>
+					</tf-button> -->
+
+					<step-quick-add 
+						[disabled]="currentStep<3"
+						(click)="onStepAddAnswerButtonClicked()" 
+						title="Add Answer"
+					></step-quick-add>
+
+
 				</div>
 				
 			</div>

@@ -13,6 +13,7 @@ import { DelegateDetailsComponent } from './assign/delegate-details/delegate-det
 import { QuestionBuilderComponent } from './question-builder/question-builder.component';
 import { AnswerDetailsComponent } from './question-builder/answer-details/answer-details.component';
 import { QuestionDetailsComponent } from './question-builder/question-details/question-details.component';
+import { StepQuickAddComponent } from './question-builder/step-quick-add/step-quick-add.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { QuestionDetailsComponent } from './question-builder/question-details/qu
     DelegateDetailsComponent,
     QuestionBuilderComponent,
     AnswerDetailsComponent,
-    QuestionDetailsComponent
+    QuestionDetailsComponent,
+    StepQuickAddComponent
   ],
   imports: [
 		BrowserModule,
