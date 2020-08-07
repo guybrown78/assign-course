@@ -13,7 +13,7 @@
 .answer-disabled-overlay{
 	display: flex;
 	position: absolute;
-	z-index: 50;
+	z-index: 39;
 	/* background-color: #D0DFE3; */
 	background-color: #FFFFFF;
 	opacity: 0.5;

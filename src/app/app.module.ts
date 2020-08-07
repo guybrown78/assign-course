@@ -12,6 +12,7 @@ import { AssignToCourseComponent } from './assign/assign-to-course/assign-to-cou
 import { DelegateDetailsComponent } from './assign/delegate-details/delegate-details.component';
 import { QuestionBuilderComponent } from './question-builder/question-builder.component';
 import { AnswerDetailsComponent } from './question-builder/answer-details/answer-details.component';
+import { QuestionDetailsComponent } from './question-builder/question-details/question-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AnswerDetailsComponent } from './question-builder/answer-details/answer
     AssignToCourseComponent,
     DelegateDetailsComponent,
     QuestionBuilderComponent,
-    AnswerDetailsComponent
+    AnswerDetailsComponent,
+    QuestionDetailsComponent
   ],
   imports: [
 		BrowserModule,
