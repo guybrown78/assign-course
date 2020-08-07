@@ -14,6 +14,7 @@ export class AnswerDetailsComponent implements OnInit {
 	@Output('changeIsCorrectAnswer') changeIsCorrectAnswer = new EventEmitter();
 	@Output('removeAnswer') removeAnswer = new EventEmitter();
 	@Output('updateTitle') updateTitle = new EventEmitter();
+	uploadImageConfirmationOpened:boolean = false;
   constructor() { }
 
   ngOnInit() {
@@ -31,5 +32,16 @@ export class AnswerDetailsComponent implements OnInit {
 	}
 	onAnswerTitleUpdated(event:CustomEvent) {
 		this.updateTitle.emit(event);
+	}
+
+	onUploadImage(){
+		this.uploadImageConfirmationOpened = true;
+	}
+
+	modalUploadImageClosedHandler(){
+		this.uploadImageConfirmationOpened = false;
+	}
+	modalUploadImageConfirmedHandler(){
+		this.uploadImageConfirmationOpened = false;
 	}
 }

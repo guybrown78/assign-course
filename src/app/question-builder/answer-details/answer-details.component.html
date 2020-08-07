@@ -24,6 +24,22 @@
 		</tf-input>
 	</div>
 
+	<div class="image-details" *ngIf="!isCorrectAnswer">
+		&nbsp;
+	</div>
+
+
+	<div class="image-details" *ngIf="isCorrectAnswer">
+		<tf-button 
+				size="xs" 
+				colour="grey" 
+				icon="upload"
+				(click)="onUploadImage($event)"
+			>
+				{{ !imageName ? 'Upload Answer Image' : 'Edit Answer Image' }}
+			</tf-button>
+	</div>
+
 	<div class="remove-details">
 
 		<tf-icon-button
@@ -44,3 +60,18 @@
 	</div>
 	
 </div>
+
+
+
+
+<tf-modal 
+	id="uploadImage" 
+	display-title="Upload Correct Answer Image"
+	[opened]="uploadImageConfirmationOpened" 
+	show-close="true"
+	confirm-text="Upload"
+	(tfModalClosed)="modalUploadImageClosedHandler($event)"
+	(tfModalConfirmed)="modalUploadImageConfirmedHandler($event)"
+>
+	<answer-image-uploader></answer-image-uploader>
+</tf-modal>

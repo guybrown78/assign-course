@@ -17,7 +17,7 @@
 			<tf-button 
 				*ngIf="!isOpen"
 				size="m" 
-				colour="blue" 
+				colour="grey" 
 				(click)="onEditQuestion($event)"
 			>
 				Edit
@@ -174,7 +174,7 @@
 					<answer-details 
 						*ngFor="let answer of answers; let i = index"
 						[title]=answer.title
-						[imageName]=answer.emailAddress
+						[imageName]=answer.imageName
 						[isCorrectAnswer]=answer.isCorrectAnswer
 						[index]=i
 						(changeIsCorrectAnswer)='changeIsCorrectAnswer($event)'
@@ -208,3 +208,16 @@
 	</div> <!-- END .content-container -->
 </div>
 
+<tf-modal 
+	id="removeQuestion" 
+	[displayTitle]="'Remove Question ' + (index + 1)"
+	[opened]="removeConfirmationOpened" 
+	show-close="false"
+	confirm-text="Remove"
+	(tfModalClosed)="modalRemoveClosedHandler($event)"
+	(tfModalConfirmed)="modalRemoveConfirmedHandler($event)"
+>
+	<tf-p-tag>
+		Are you sure you want to remove Question {{ index + 1 }}. 
+	</tf-p-tag>
+</tf-modal>

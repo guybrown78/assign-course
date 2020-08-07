@@ -14,6 +14,7 @@ import { QuestionBuilderComponent } from './question-builder/question-builder.co
 import { AnswerDetailsComponent } from './question-builder/answer-details/answer-details.component';
 import { QuestionDetailsComponent } from './question-builder/question-details/question-details.component';
 import { StepQuickAddComponent } from './question-builder/step-quick-add/step-quick-add.component';
+import { AnswerImageUploaderComponent } from './question-builder/answer-image-uploader/answer-image-uploader.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StepQuickAddComponent } from './question-builder/step-quick-add/step-qu
     QuestionBuilderComponent,
     AnswerDetailsComponent,
     QuestionDetailsComponent,
-    StepQuickAddComponent
+    StepQuickAddComponent,
+    AnswerImageUploaderComponent
   ],
   imports: [
 		BrowserModule,

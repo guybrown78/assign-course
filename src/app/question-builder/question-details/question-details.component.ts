@@ -12,6 +12,8 @@ export class QuestionDetailsComponent implements OnInit {
 	@Output('questionDetails') questionDetails = new EventEmitter();
 	@Output('removeQuestion') removeQuestion = new EventEmitter();
 	@Output('editQuestion') editQuestion = new EventEmitter();
+	//
+	removeConfirmationOpened:boolean = false;
 	// currentStep. 
 	// 1 = select question learnng objective
 	// 2 = question title
@@ -123,7 +125,7 @@ export class QuestionDetailsComponent implements OnInit {
 			{
 				title:"",
 				isCorrectAnswer:false,
-				imageName:""
+				imageName:null
 			}
 		)
 		this.setQuestionDetails();
@@ -140,7 +142,7 @@ export class QuestionDetailsComponent implements OnInit {
 				this.onAddNewAnswer();
 				break;
 			case "deleteQuestion":
-				this.removeQuestion.emit(this.index);
+				this.removeConfirmationOpened = true;
 				break;
 		}
 	}
@@ -171,4 +173,18 @@ export class QuestionDetailsComponent implements OnInit {
 		}
 		this.questionDetails.emit(qDetails);
 	}
+
+
+
+	modalRemoveClosedHandler(event){
+		console.log("remove canceled")
+		this.removeConfirmationOpened = false;
+	}
+	modalRemoveConfirmedHandler(event){
+		console.log("remove confirmed");
+		this.removeConfirmationOpened = false;
+		this.removeQuestion.emit(this.index);
+	}
+
+
 }
