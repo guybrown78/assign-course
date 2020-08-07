@@ -1,4 +1,10 @@
 <tf-card>
+
+	<tf-p 
+		*ngIf="!questions.length"
+		colour="blue" 
+		text-align="center"
+	>Add a Question to continue</tf-p>
 	<tf-node 
 		*ngFor="let question of questions; let i = index"
 		padding="none"
@@ -8,8 +14,10 @@
 		
 			<question-details
 				[index]=i
+				[isOpen]="i === currentIndex"
 				(questionDetails)='updateQuestionDetails($event, i)'
 				(removeQuestion)='removeQuestion($event)'
+				(editQuestion)='editQuestion($event)'
 			></question-details>
 
 		</div> <!-- END .node-inner -->
@@ -58,3 +66,33 @@
 	</div>
 
 </tf-card>
+
+
+
+
+<tf-modal 
+	id="cancelQuestions" 
+	display-title="Cancel Question Builder"
+	[opened]="cancelConfirmationOpened" 
+	show-close="false"
+	[confirmText]="questions.length === 1 ? 'Yes, Cancel this question' : 'Yes, Cancel these questions' "
+	(tfModalClosed)="tfModalClosedHandler($event)"
+	(tfModalConfirmed)="tfModalConfirmedHandler($event)"
+>
+	<tf-p-tag>Are you sure you want to cancel and loose {{ questions.length === 1 ? 'this question' : ('these ' + questions.length + ' questions' )}}?</tf-p-tag>
+</tf-modal>
+
+
+<tf-modal 
+	id="saveQuestions" 
+	display-title="Save"
+	[opened]="saveConfirmationOpened" 
+	show-close="true"
+	[confirmText]="Save"
+	(tfModalClosed)="modalSaveClosedHandler($event)"
+	(tfModalConfirmed)="modalSaveConfirmedHandler($event)"
+>
+	<tf-p-tag>
+		{{ questions | json }}
+	</tf-p-tag>
+</tf-modal>

@@ -10,7 +10,9 @@ export class QuestionBuilderComponent implements OnInit {
 
 	questions:any[] = []
 	allQuestionsValid:boolean = false;
-
+	currentIndex:number = 0;
+	cancelConfirmationOpened:boolean = false;
+	saveConfirmationOpened:boolean = false;
   constructor() {
 		this.addNewQuestion()
 	}
@@ -18,6 +20,11 @@ export class QuestionBuilderComponent implements OnInit {
   ngOnInit() {
 		
   }
+
+	editQuestion(index){
+		// remove that index entry from the array
+		this.currentIndex = index;
+	}
 
 	addNewQuestion(){
 		this.questions.push(
@@ -28,6 +35,7 @@ export class QuestionBuilderComponent implements OnInit {
 				isValid:false,
 			}
 		)
+		this.currentIndex = this.questions.length - 1;
 		this.checkValidation();
 	}
 	removeQuestion(index){
@@ -51,10 +59,30 @@ export class QuestionBuilderComponent implements OnInit {
 	saveQuestions(){
 		console.log(this.questions);
 		// TODO
+		this.saveConfirmationOpened = true;
 	}
 
 	cancel(){
-		console.log("cancel")
+		this.cancelConfirmationOpened = true;
+	}
+
+	tfModalConfirmedHandler(event){
+		// user wants to cansel, 
 		// TODO
+		this.cancelConfirmationOpened = false;
+	}
+	tfModalClosedHandler(event){
+		// user has decided not to cancel
+		this.cancelConfirmationOpened = false;
+	}
+
+
+	modalSaveClosedHandler(event){
+		console.log("save closed")
+		this.saveConfirmationOpened = false;
+	}
+	modalSaveConfirmedHandler(event){
+		console.log("save confirmed");
+		this.saveConfirmationOpened = false;
 	}
 }

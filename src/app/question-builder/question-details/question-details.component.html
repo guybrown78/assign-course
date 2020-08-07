@@ -14,7 +14,17 @@
 		</div>
 		<div class="question-actions">
 			
+			<tf-button 
+				*ngIf="!isOpen"
+				size="m" 
+				colour="blue" 
+				(click)="onEditQuestion($event)"
+			>
+				Edit
+			</tf-button>
+
 			<tf-dropdown 
+				*ngIf="isOpen"
 				display-title="Actions" 
 				colour="grey" 
 				[dropdownId]="index"
@@ -38,7 +48,7 @@
 	</div>
 
 
-	<div class="content-container">
+	<div class="content-container" *ngIf="isOpen">
 
 		<div class="step-node">
 			<!-- title -->

@@ -8,8 +8,10 @@ import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms"
 })
 export class QuestionDetailsComponent implements OnInit {
 	@Input ('index') index:number;
+	@Input ('isOpen') isOpen:boolean = false;
 	@Output('questionDetails') questionDetails = new EventEmitter();
 	@Output('removeQuestion') removeQuestion = new EventEmitter();
+	@Output('editQuestion') editQuestion = new EventEmitter();
 	// currentStep. 
 	// 1 = select question learnng objective
 	// 2 = question title
@@ -93,13 +95,16 @@ export class QuestionDetailsComponent implements OnInit {
 		this.setQuestionDetails();
 	}
 
-	
+	onEditQuestion(){
+		this.editQuestion.emit(this.index);
+	}
 
 	updateAnswerTitle(event, index){
 		// set the title fot the answer from it's index in the array
 		this.answers[index].title = event.detail.value
 		this.setQuestionDetails();
 	}
+
 
 	removeAnswer(index){
 		// remove that index entry from the array
