@@ -38,10 +38,10 @@ export class AnswerDetailsComponent implements OnInit {
 		this.uploadImageConfirmationOpened = true;
 	}
 
-	modalUploadImageClosedHandler(){
+	modalUploadImageClosedHandler(event){
 		this.uploadImageConfirmationOpened = false;
 	}
-	modalUploadImageConfirmedHandler(){
+	modalUploadImageConfirmedHandler(event){
 		this.uploadImageConfirmationOpened = false;
 	}
 }
