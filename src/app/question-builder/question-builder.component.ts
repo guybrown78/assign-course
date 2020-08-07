@@ -21,28 +21,7 @@ export class QuestionBuilderComponent implements OnInit {
 	qtDisabled: boolean = true;
 	qtSubmitted: boolean = false;
 	//
-	answers:any[] = [
-		{
-			title:"",
-			isCorrectAnswer:false,
-			imageName:""
-		},
-		{
-			title:"",
-			isCorrectAnswer:false,
-			imageName:""
-		},
-		{
-			title:"",
-			isCorrectAnswer:false,
-			imageName:""
-		},
-		{
-			title:"",
-			isCorrectAnswer:false,
-			imageName:""
-		},
-	]
+	answers:any[] = []
 
 
   constructor(fb: FormBuilder) {
@@ -53,26 +32,20 @@ export class QuestionBuilderComponent implements OnInit {
 		this.qtForm = fb.group({ 
 			questionTitle: ['', Validators.required]
 		});
+
+		const defaultAnswerCount = 4;
+		for(let i = 0; i < defaultAnswerCount; i++) {
+				this.onAddNewAnswer();
+		}
+
 	}
 
   ngOnInit() {
+		
   }
 
 	get learningObjective() { return this.loForm.get('learningObjective'); }
 	get questionTitle() { return this.qtForm.get('questionTitle'); }
-
-
-
-		// onKeyPress(event){
-		// 	console.log(event)
-		// 	if (event.keyCode === 13) {
-		// 		// Cancel the default action, if needed
-		// 		event.preventDefault();
-		// 		console.log(event)
-		// 		// Trigger the button element with a click
-		// 		// document.getElementById("myBtn").click();
-		// 	}
-		// }
 
 	onLOSubmit(){
 		if(this.currentStep === 1 && !this.loSubmitted){
@@ -89,6 +62,7 @@ export class QuestionBuilderComponent implements OnInit {
 	}
 
 	onQTSubmit(){
+		console.log(this.qtForm)
 		if(this.currentStep === 2 && !this.qtSubmitted){
 			// set lo params
 			this.qtDisabled = true;
@@ -102,13 +76,32 @@ export class QuestionBuilderComponent implements OnInit {
 		this.qtDisabled = !this.qtDisabled;	
 	}
 
-	removeAnswer(event){
-		console.log("removeAnswer")
-		console.log(event)
+	changeIsCorrectAnswer(event){
+		const { index } = event;
+		// loop through all the answers setting the isCorrectAnswer flag according to the index of the one that has just been selected.
+		// only one is to be set so it turns off all the others
+		this.answers.map((a,i) => {
+			a.isCorrectAnswer = i === index ? true : false;
+		});
 	}
 
-	updateAnserTitle(event){
-		console.log("updateAnserTitle")
-		console.log(event)
+	removeAnswer(index){
+		// remove that index entry from the array
+		this.answers.splice(index, 1);
+	}
+
+	updateAnswerTitle(event, index){
+		// set the title fot the answer from it's index in the array
+		this.answers[index].title = event.detail.value
+	}
+
+	onAddNewAnswer(){
+		this.answers.push(
+			{
+				title:"",
+				isCorrectAnswer:false,
+				imageName:""
+			}
+		)
 	}
 }

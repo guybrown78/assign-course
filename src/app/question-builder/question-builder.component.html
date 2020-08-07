@@ -8,14 +8,14 @@
 		
 
 				<div class="question-number">
-					<tf-h4>
+					<tf-h3>
 						1
-					</tf-h4>
+					</tf-h3>
 				</div>
 				<div class="question-title">
-					<tf-h4>
-						Question
-					</tf-h4>
+					<tf-h3 [colour]="qtSubmitted ? 'navy' : 'grey' ">
+						{{ qtSubmitted ? qtForm.value.questionTitle : "Create a Question..." }}
+					</tf-h3>
 				</div>
 				<div class="question-actions">
 					
@@ -166,18 +166,28 @@
 						>
 						
 							<answer-details 
-								*ngFor="let answer of answers"
+								*ngFor="let answer of answers; let i = index"
 								[title]=answer.title
 								[imageName]=answer.emailAddress
 								[isCorrectAnswer]=answer.isCorrectAnswer
-								[index]=answer.index
+								[index]=i
+								(changeIsCorrectAnswer)='changeIsCorrectAnswer($event)'
 								(removeAnswer)='removeAnswer($event)'
-								(updateTitle)='updateAnserTitle($event)'
+								(updateTitle)='updateAnswerTitle($event, i)'
+								[disabled]="currentStep<3"
 							></answer-details>
+
+							<tf-button 
+								[disabled]="currentStep<3"
+								(click)="onAddNewAnswer()"
+							>
+								add new answer
+							</tf-button>
 						</div>
 						
 					</div>
-	
+					
+					
 				</div> <!-- END .step-node -->
 
 

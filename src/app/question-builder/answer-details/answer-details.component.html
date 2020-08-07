@@ -1,31 +1,46 @@
-<div class="delegate-details-container">
+<div class="answer-details-container">
 
-	<tf-icon-button
-			size="xs"
-			icon="check"
-			colour="aqua"
-			(click)="onRemoveAnswer()"
-	></tf-icon-button>
-
-	<div class="name-details">
-
-			<tf-input 
-				name="answerTitle" 
-				(tfOnInput)="onAnswerTitleUpdated($event)" 
-				class="first-name-input"
-				placeholder="Enter the Answer">
-			</tf-input>
-
+	<div 
+		*ngIf="disabled"
+		class="answer-disabled-overlay">
 	</div>
 
-	<div class="email-details">
+	<div class="correct-answer-details">
+		<tf-icon-button
+				size="xs"
+				[icon]="isCorrectAnswer ? 'check' : ''"
+				[colour]="isCorrectAnswer ? 'aqua' : 'white'"
+				(click)="onToggleCorrectAnswer()"
+				[asButton]="!isCorrectAnswer"
+		></tf-icon-button>
+	</div>
+	
+	<div class="title-details">
+		<tf-input 
+			name="answerTitle" 
+			(tfOnInput)="onAnswerTitleUpdated($event)" 
+			class="first-name-input"
+			placeholder="Enter the Answer">
+		</tf-input>
+	</div>
+
+	<div class="remove-details">
 
 		<tf-icon-button
+			*ngIf="index > 0"
 			size="xs"
 			icon="close"
 			colour="grey"
 			(click)="onRemoveAnswer()"
 		></tf-icon-button>
+
+		<tf-icon-hexagon
+			*ngIf="index === 0"
+			size="xs"
+			icon="close"
+			colour="grey"
+		></tf-icon-hexagon>
+
 	</div>
 	
 </div>

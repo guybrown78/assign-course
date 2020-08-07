@@ -10,6 +10,8 @@ export class AnswerDetailsComponent implements OnInit {
 	@Input ('isCorrectAnswer') isCorrectAnswer:boolean;
 	@Input ('index') index:number;
 	@Input ('imageName') imageName:string;
+	@Input ('disabled') disabled:boolean;
+	@Output('changeIsCorrectAnswer') changeIsCorrectAnswer = new EventEmitter();
 	@Output('removeAnswer') removeAnswer = new EventEmitter();
 	@Output('updateTitle') updateTitle = new EventEmitter();
   constructor() { }
@@ -17,6 +19,13 @@ export class AnswerDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
+	onToggleCorrectAnswer(){
+		// act like a radio button set and don't allow them to turn off without setting another answer first
+		if(this.isCorrectAnswer)
+			return;
+		this.isCorrectAnswer = !this.isCorrectAnswer;
+		this.changeIsCorrectAnswer.emit({index:this.index, isCorrectAnswer:this.isCorrectAnswer})
+	}
 	onRemoveAnswer(){
 		this.removeAnswer.emit(this.index);
 	}
