@@ -22,4 +22,41 @@
 		add question
 	</tf-button>
 
+	<div class="tansparent-node">
+		<tf-node-fxl-flex-fxr>
+			<tf-node-slot-wrapper slot="fxl">
+				<tf-button 
+					colour="white"
+					(click)="cancel()"
+				>
+					Cancel
+				</tf-button>
+			</tf-node-slot-wrapper>
+			<tf-node-slot-wrapper slot="flex">
+				&nbsp;
+			</tf-node-slot-wrapper>
+			<tf-node-slot-wrapper slot="fxr">
+			
+				<!-- <tf-span-italic *ngIf="currentStep === 1" colour="blue">
+					Select a course to continue
+				</tf-span-italic> -->
+				<tf-button 
+					colour="aqua"
+					disabled
+					*ngIf="!allQuestionsValid"
+				>
+					Set Questions to continue
+				</tf-button>
+				<tf-button 
+					colour="aqua"
+					(click)="saveQuestions()"
+					[disabled]="buttonDisabled"
+					*ngIf="allQuestionsValid"
+				>
+					Save {{ questions.length }} question{{ questions.length === 1 ? "" : "s" }}
+				</tf-button>
+			</tf-node-slot-wrapper>
+		</tf-node-fxl-flex-fxr>
+	</div>
+
 </tf-card>
