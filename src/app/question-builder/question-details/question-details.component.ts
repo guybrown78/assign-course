@@ -15,18 +15,19 @@ export class QuestionDetailsComponent implements OnInit {
 	//
 	removeConfirmationOpened:boolean = false;
 	// currentStep. 
-	// 1 = select question learnng objective
-	// 2 = question title
+	// 1 = question title
+	// 2 = select question learnng objective
 	// 3 = answers
 	currentStep:number = 1;
 	//
+	qtForm: FormGroup;
+	qtDisabled: boolean = false;
+	qtSubmitted: boolean = false;
+	//
 	loForm: FormGroup;
-	loDisabled: boolean = false;
+	loDisabled: boolean = true;
 	loSubmitted: boolean = false;
 	//
-	qtForm: FormGroup;
-	qtDisabled: boolean = true;
-	qtSubmitted: boolean = false;
 	//
 	answers:any[] = []
 
@@ -54,36 +55,40 @@ export class QuestionDetailsComponent implements OnInit {
 	get learningObjective() { return this.loForm.get('learningObjective'); }
 	get questionTitle() { return this.qtForm.get('questionTitle'); }
 
-	onLOSubmit(){
-		if(this.currentStep === 1 && !this.loSubmitted){
-			// set lo params
-			this.loDisabled = true;
-			this.loSubmitted = true;
-			// initiate next step
-			this.currentStep = 2;
-			this.qtDisabled = false;
-			this.setQuestionDetails();
-			return;
-		}
-		// loForm has previously been submitted, toggle the disabled state
-		this.loDisabled = !this.loDisabled;	
-		this.setQuestionDetails();
-	}
+	
 
 	onQTSubmit(){
 		console.log(this.qtForm)
-		if(this.currentStep === 2 && !this.qtSubmitted){
+		if(this.currentStep === 1 && !this.qtSubmitted){
 			// set lo params
 			this.qtDisabled = true;
 			this.qtSubmitted = true;
+			// initiate next step
+			this.currentStep = 2;
+			this.loDisabled = false;
+			this.setQuestionDetails();
+			return;
+		}
+		// qtForm has previously been submitted, toggle the disabled state
+		console.log(this.qtDisabled)
+		this.qtDisabled = !this.qtDisabled;	
+		this.setQuestionDetails();
+	}
+
+
+	onLOSubmit(){
+		if(this.currentStep === 2 && !this.loSubmitted){
+			// set lo params
+			this.loDisabled = true;
+			this.loSubmitted = true;
 			// initiate next step
 			this.currentStep = 3;
 			// this.qtDisabled = false;
 			this.setQuestionDetails();
 			return;
 		}
-		// qtForm has previously been submitted, toggle the disabled state
-		this.qtDisabled = !this.qtDisabled;	
+		// loForm has previously been submitted, toggle the disabled state
+		this.loDisabled = !this.loDisabled;	
 		this.setQuestionDetails();
 	}
 

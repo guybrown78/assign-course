@@ -1,6 +1,6 @@
 		
 <div class="question-details-container">
-	<div class="question-title-container">
+	<div class="question-title-container" [ngClass]=" !isOpen ? 'grey':'white'">
 
 		<div class="question-number">
 			<tf-h3>
@@ -54,58 +54,7 @@
 			<!-- title -->
 			<div 
 				class="step-title"
-				[ngClass]="(currentStep===1)?'blue':'grey'"
-			>
-				Learning Objective
-			</div>
-
-			<!-- content -->
-			<div class="step-content-container">
-				<div 
-					class="step-content learning-objective"
-					[ngClass]="(currentStep===1)?'blue':'grey'"
-				>
-				
-					<form [formGroup]="loForm" (ngSubmit)="onLOSubmit()" >
-
-						<tf-node-flex-fxr>
-
-							<tf-ng-input
-								slot="flex"
-								[name]="learningObjective"
-								type="input"
-								placeholder="Type the questions Learning Objective"
-								[formControl]="learningObjective"
-								[disabled]="loDisabled"
-							></tf-ng-input>
-
-							<tf-button-light-dom 
-								slot="fxr"
-								[colour]="!loSubmitted ? 'blue' : !loDisabled ? 'blue' : 'grey' " 
-								button-type="submit"
-								[disabled]="!loForm.valid"
-							>	
-								{{ !loSubmitted ? "Add" : loDisabled ? "Edit" : "Change" }}
-							</tf-button-light-dom>
-				
-						</tf-node-flex-fxr>
-
-					</form>
-
-				</div>
-				
-			</div>
-
-		</div> <!-- END .step-node -->
-
-
-
-
-		<div class="step-node">
-			<!-- title -->
-			<div 
-				class="step-title"
-				[ngClass]="(currentStep===2)?'blue':'grey'"
+				[ngClass]="(currentStep === 1 || !qtDisabled)?'blue':'grey'"
 			>
 				Question
 			</div>
@@ -114,7 +63,7 @@
 			<div class="step-content-container">
 				<div 
 					class="step-content learning-objective"
-					[ngClass]="(currentStep===2)?'blue':'grey'"
+					[ngClass]="(currentStep === 1 || !qtDisabled)?'blue':'grey'"
 				>
 				
 					<form 
@@ -153,6 +102,54 @@
 
 		</div> <!-- END .step-node -->
 
+
+		<div class="step-node">
+			<!-- title -->
+			<div 
+				class="step-title"
+				[ngClass]="(currentStep === 2 || !loDisabled)?'blue':'grey'"
+			>
+				Learning Objective
+			</div>
+
+			<!-- content -->
+			<div class="step-content-container">
+				<div 
+					class="step-content learning-objective"
+					[ngClass]="(currentStep === 2 || !loDisabled)?'blue':'grey'"
+				>
+				
+					<form [formGroup]="loForm" (ngSubmit)="onLOSubmit()" >
+
+						<tf-node-flex-fxr>
+
+							<tf-ng-input
+								slot="flex"
+								[name]="learningObjective"
+								type="input"
+								placeholder="Type the questions Learning Objective"
+								[formControl]="learningObjective"
+								[disabled]="loDisabled"
+							></tf-ng-input>
+
+							<tf-button-light-dom 
+								slot="fxr"
+								[colour]="!loSubmitted ? 'blue' : !loDisabled ? 'blue' : 'grey' " 
+								button-type="submit"
+								[disabled]="!loForm.valid"
+							>	
+								{{ !loSubmitted ? "Add" : loDisabled ? "Edit" : "Change" }}
+							</tf-button-light-dom>
+				
+						</tf-node-flex-fxr>
+
+					</form>
+
+				</div>
+				
+			</div>
+
+		</div> <!-- END .step-node -->
 
 
 
